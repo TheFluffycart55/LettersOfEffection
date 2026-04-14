@@ -2,6 +2,7 @@ package net.thefluffycart.loe;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.thefluffycart.loe.block.LOEBlocks;
 import net.thefluffycart.loe.items.LOEItems;
 import net.thefluffycart.loe.data.LOEComponentPredicates;
 import net.thefluffycart.loe.data.LOEDataComponents;
@@ -17,6 +18,7 @@ public class LettersOfEffection implements ModInitializer {
 		LOEComponentPredicates.initialize();
 		LOEDataComponents.initialize();
 		LOEItems.initialize();
+		LOEBlocks.initialize();
 		LOGGER.info("Hello Fabric world!");
 	}
 }

@@ -19,7 +19,6 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.thefluffycart.loe.LettersOfEffection;
-import net.thefluffycart.loe.data.BlankLetterContent;
 import net.thefluffycart.loe.data.LOEDataComponents;
 import net.thefluffycart.loe.data.SealedLetterContent;
 import org.jspecify.annotations.Nullable;
@@ -29,16 +28,16 @@ import java.util.List;
 import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
-public class LetterViewScreen extends Screen {
+public class BlankLetterViewScreen extends Screen {
     public static final int PAGE_INDICATOR_TEXT_Y_OFFSET = 16;
     public static final int PAGE_TEXT_X_OFFSET = 36;
     public static final int PAGE_TEXT_Y_OFFSET = 30;
     private static final int BACKGROUND_TEXTURE_WIDTH = 256;
     private static final int BACKGROUND_TEXTURE_HEIGHT = 256;
     private static final Component TITLE = Component.translatable("letter.view.title");
-    private static final Style PAGE_TEXT_STYLE;
-    public static final LetterViewScreen.LetterAccess EMPTY_ACCESS;
-    public static final Identifier LETTER_LOCATION;
+    private static final Style PAGE_TEXT_STYLE = Style.EMPTY.withoutShadow().withColor(-16777216);
+    public static final BlankLetterViewScreen.LetterAccess EMPTY_ACCESS = new BlankLetterViewScreen.LetterAccess(List.of());
+    public static final Identifier LETTER_LOCATION = Identifier.fromNamespaceAndPath(LettersOfEffection.MOD_ID, "textures/gui/blank_letter.png");
     protected static final int TEXT_WIDTH = 114;
     protected static final int TEXT_HEIGHT = 128;
     protected static final int IMAGE_WIDTH = 192;
@@ -47,36 +46,32 @@ public class LetterViewScreen extends Screen {
     private static final int PAGE_BUTTON_Y = 157;
     private static final int PAGE_BACK_BUTTON_X = 43;
     private static final int PAGE_FORWARD_BUTTON_X = 116;
-    private LetterViewScreen.LetterAccess letterAccess;
+    private BlankLetterViewScreen.LetterAccess letterAccess;
     private int currentPage;
-    private List<FormattedCharSequence> cachedPageComponents;
-    private int cachedPage;
-    private Component pageMsg;
+    private List<FormattedCharSequence> cachedPageComponents = Collections.emptyList();
+    private int cachedPage = -1;
+    private Component pageMsg = CommonComponents.EMPTY;
     private PageButton forwardButton;
     private PageButton backButton;
     private final boolean playTurnSound;
 
-    public LetterViewScreen(final LetterViewScreen.LetterAccess letterAccess) {
+    public BlankLetterViewScreen(final BlankLetterViewScreen.LetterAccess letterAccess) {
         this(letterAccess, true);
     }
 
-    public LetterViewScreen() {
+    public BlankLetterViewScreen() {
         this(EMPTY_ACCESS, false);
     }
 
-    private LetterViewScreen(final LetterViewScreen.LetterAccess letterAccess, final boolean playTurnSound) {
+    private BlankLetterViewScreen(final BlankLetterViewScreen.LetterAccess letterAccess, final boolean playTurnSound) {
         super(TITLE);
-        this.cachedPageComponents = Collections.emptyList();
-        this.cachedPage = -1;
-        this.pageMsg = CommonComponents.EMPTY;
         this.letterAccess = letterAccess;
         this.playTurnSound = playTurnSound;
     }
 
-    public void setLetterAccess(final LetterViewScreen.LetterAccess letterAccess) {
+    public void setLetterAccess(final BlankLetterViewScreen.LetterAccess letterAccess) {
         this.letterAccess = letterAccess;
         this.currentPage = Mth.clamp(this.currentPage, 0, letterAccess.getPageCount());
-        this.updateButtonVisibility();
         this.cachedPage = -1;
     }
 
@@ -84,7 +79,6 @@ public class LetterViewScreen extends Screen {
         int clampedPage = Mth.clamp(page, 0, this.letterAccess.getPageCount() - 1);
         if (clampedPage != this.currentPage) {
             this.currentPage = clampedPage;
-            this.updateButtonVisibility();
             this.cachedPage = -1;
             return true;
         } else {
@@ -96,29 +90,30 @@ public class LetterViewScreen extends Screen {
         return this.setPage(page);
     }
 
+    @Override
     protected void init() {
         this.createMenuControls();
         this.createPageControlButtons();
     }
 
+    @Override
     public Component getNarrationMessage() {
-        return CommonComponents.joinLines(new Component[]{super.getNarrationMessage(), this.getPageNumberMessage(), this.letterAccess.getPage(this.currentPage)});
+        return CommonComponents.joinLines(super.getNarrationMessage(), this.getPageNumberMessage(), this.letterAccess.getPage(this.currentPage));
     }
 
     private Component getPageNumberMessage() {
-        return Component.translatable("letter.pageIndicator", new Object[]{this.currentPage + 1, Math.max(this.getNumPages(), 1)}).withStyle(PAGE_TEXT_STYLE);
+        return Component.translatable("letter.pageIndicator", this.currentPage + 1, Math.max(this.getNumPages(), 1)).withStyle(PAGE_TEXT_STYLE);
     }
 
     protected void createMenuControls() {
-        this.addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, (button) -> this.onClose()).pos((this.width - 200) / 2, this.menuControlsTop()).width(200).build());
+        this.addRenderableWidget(
+                Button.builder(CommonComponents.GUI_DONE, button -> this.onClose()).pos((this.width - 200) / 2, this.menuControlsTop()).width(200).build()
+        );
     }
 
     protected void createPageControlButtons() {
         int left = this.backgroundLeft();
         int top = this.backgroundTop();
-        this.forwardButton = (PageButton)this.addRenderableWidget(new PageButton(left + 116, top + 157, true, (button) -> this.pageForward(), this.playTurnSound));
-        this.backButton = (PageButton)this.addRenderableWidget(new PageButton(left + 43, top + 157, false, (button) -> this.pageBack(), this.playTurnSound));
-        this.updateButtonVisibility();
     }
 
     private int getNumPages() {
@@ -127,47 +122,38 @@ public class LetterViewScreen extends Screen {
 
     protected void pageBack() {
         if (this.currentPage > 0) {
-            --this.currentPage;
+            this.currentPage--;
         }
 
-        this.updateButtonVisibility();
     }
 
     protected void pageForward() {
         if (this.currentPage < this.getNumPages() - 1) {
-            ++this.currentPage;
+            this.currentPage++;
         }
 
-        this.updateButtonVisibility();
     }
 
-    private void updateButtonVisibility() {
-        this.forwardButton.visible = this.currentPage < this.getNumPages() - 1;
-        this.backButton.visible = this.currentPage > 0;
-    }
-
+    @Override
     public boolean keyPressed(final KeyEvent event) {
         if (super.keyPressed(event)) {
             return true;
         } else {
-            boolean var10000;
-            switch (event.key()) {
-                case 266:
+            return switch (event.key()) {
+                case 266 -> {
                     this.backButton.onPress(event);
-                    var10000 = true;
-                    break;
-                case 267:
+                    yield true;
+                }
+                case 267 -> {
                     this.forwardButton.onPress(event);
-                    var10000 = true;
-                    break;
-                default:
-                    var10000 = false;
-            }
-
-            return var10000;
+                    yield true;
+                }
+                default -> false;
+            };
         }
     }
 
+    @Override
     public void extractRenderState(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, final float a) {
         super.extractRenderState(graphics, mouseX, mouseY, a);
         this.visitText(graphics.textRenderer(GuiGraphicsExtractor.HoveredTextEffects.TOOLTIP_AND_CURSOR), false);
@@ -187,19 +173,15 @@ public class LetterViewScreen extends Screen {
             collector.accept(TextAlignment.RIGHT, left + 148, top + 16, this.pageMsg);
         }
 
-        Objects.requireNonNull(this.font);
         int shownLines = Math.min(128 / 9, this.cachedPageComponents.size());
 
-        for(int i = 0; i < shownLines; ++i) {
+        for (int i = 0; i < shownLines; i++) {
             FormattedCharSequence component = (FormattedCharSequence)this.cachedPageComponents.get(i);
-            int var10001 = left + 36;
-            int var10002 = top + 30;
-            Objects.requireNonNull(this.font);
-            collector.accept(var10001, var10002 + i * 9, component);
+            collector.accept(left + 36, top + 30 + i * 9, component);
         }
-
     }
 
+    @Override
     public void extractBackground(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, final float a) {
         super.extractBackground(graphics, mouseX, mouseY, a);
         graphics.blit(RenderPipelines.GUI_TEXTURED, LETTER_LOCATION, this.backgroundLeft(), this.backgroundTop(), 0.0F, 0.0F, 192, 192, 256, 256);
@@ -217,6 +199,7 @@ public class LetterViewScreen extends Screen {
         return this.backgroundTop() + 192 + 2;
     }
 
+    @Override
     public boolean mouseClicked(final MouseButtonEvent event, final boolean doubleClick) {
         if (event.button() == 0) {
             ActiveTextCollector.ClickableStyleFinder finder = new ActiveTextCollector.ClickableStyleFinder(this.font, (int)event.x(), (int)event.y());
@@ -230,60 +213,56 @@ public class LetterViewScreen extends Screen {
         return super.mouseClicked(event, doubleClick);
     }
 
-    protected boolean handleClickEvent(final @Nullable ClickEvent event) {
+    protected boolean handleClickEvent(@Nullable final ClickEvent event) {
         if (event == null) {
             return false;
         } else {
             LocalPlayer player = (LocalPlayer)Objects.requireNonNull(this.minecraft.player, "Player not available");
-
+            Objects.requireNonNull(event);
             switch (event) {
-                case ClickEvent.ChangePage(int page) when true:
-                    this.forcePage(page - 1);
-                    return true;
-                case ClickEvent.RunCommand(String command):
+                case ClickEvent.ChangePage(int var15):
+                    int var12 = var15;
+                    if (true) {
+                        this.forcePage(var12 - 1);
+                        break;
+                    }
+
+                    byte var4 = 1;
+                    break;
+                case ClickEvent.RunCommand(String var9):
                     this.closeContainerOnServer();
-                    clickCommandAction(player, command, (Screen)null);
-                    return true;
+                    clickCommandAction(player, var9, null);
+                    break;
                 default:
                     defaultHandleGameClickEvent(event, this.minecraft, this);
-                    return true;
             }
+
+            return true;
         }
     }
 
     protected void closeContainerOnServer() {
     }
 
+    @Override
     public boolean isInGameUi() {
         return true;
     }
 
-    static {
-        PAGE_TEXT_STYLE = Style.EMPTY.withoutShadow().withColor(-16777216);
-        EMPTY_ACCESS = new LetterViewScreen.LetterAccess(List.of());
-        LETTER_LOCATION = Identifier.fromNamespaceAndPath(LettersOfEffection.MOD_ID, "textures/gui/letter.png");
-    }
-
     @Environment(EnvType.CLIENT)
-    public static record LetterAccess(List<Component> pages) {
-        public LetterAccess(List<Component> pages) {
-            this.pages = pages;
-        }
-
+    public record LetterAccess(List<Component> pages) {
         public int getPageCount() {
             return this.pages.size();
         }
 
         public Component getPage(final int page) {
-            return page >= 0 && page < this.getPageCount() ? (Component)this.pages.get(page) : CommonComponents.EMPTY;
+            return page >= 0 && page < this.getPageCount() ? this.pages.get(page) : CommonComponents.EMPTY;
         }
-        public static LetterViewScreen.LetterAccess fromItem(final ItemStack itemStack) {
+
+        public static BlankLetterViewScreen.LetterAccess fromItem(final ItemStack itemStack) {
             boolean filterEnabled = Minecraft.getInstance().isTextFilteringEnabled();
             SealedLetterContent writtenContent = itemStack.get(LOEDataComponents.SEALED_LETTER_CONTENT);
-            return new LetterViewScreen.LetterAccess(writtenContent.getPages(filterEnabled));
-        }
-        public List<Component> pages() {
-            return this.pages;
+            return new BlankLetterViewScreen.LetterAccess(writtenContent.getPages(filterEnabled));
         }
     }
 }

@@ -15,9 +15,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.thefluffycart.loe.LettersOfEffection;
 import net.thefluffycart.loe.data.BlankLetterContent;
 import net.thefluffycart.loe.data.LOEDataComponents;
+import net.thefluffycart.loe.data.SealedLetterContent;
 import net.thefluffycart.loe.screen.LetterEditScreen;
 import net.thefluffycart.loe.items.LOEItems;
 
@@ -43,7 +43,7 @@ public class BlankLetterItem extends Item {
         {
             ItemStack itemStack = player.getItemInHand(hand);
             if (itemStack.has(LOEDataComponents.BLANK_LETTER_CONTENT)) {
-                if (BlankLetterContent.resolveForItem(itemStack, ResolutionContext.create(((ServerPlayer) player).createCommandSourceStack()), ((ServerPlayer) player).registryAccess())) {
+                if (SealedLetterContent.resolveForItem(itemStack, ResolutionContext.create(((ServerPlayer) player).createCommandSourceStack()), ((ServerPlayer) player).registryAccess())) {
                     ((ServerPlayer) player).containerMenu.broadcastChanges();
                 }
                 ((ServerPlayer) player).connection.send(new ClientboundOpenBookPacket(hand));
@@ -57,13 +57,12 @@ public class BlankLetterItem extends Item {
     {
         ItemStack carried = player.getInventory().getItem(slot);
         BlankLetterContent isSigned = carried.get(LOEDataComponents.BLANK_LETTER_CONTENT);
-        if (!isSigned.resolved() && !player.level().isClientSide() && title != null)
+        if (!player.level().isClientSide() && title != null)
         {
-            LettersOfEffection.LOGGER.info("Pass Test");
             ItemStack sealedLetter = carried.transmuteCopy(LOEItems.SEALED_LETTER);
-            sealedLetter.remove(LOEDataComponents.BLANK_LETTER_CONTENT);
+            sealedLetter.remove(LOEDataComponents.SEALED_LETTER_CONTENT);
             List<Filterable<Component>> pages = contents.stream().map(page -> this.filterableFromOutgoing(page, player).map(text -> (Component) Component.literal(text))).toList();
-            sealedLetter.set(LOEDataComponents.BLANK_LETTER_CONTENT, new BlankLetterContent(this.filterableFromOutgoing(title, player), player.getPlainTextName(), 0, pages, true));
+            sealedLetter.set(LOEDataComponents.SEALED_LETTER_CONTENT, new SealedLetterContent(this.filterableFromOutgoing(title, player), player.getPlainTextName(), 0, pages, true));
             player.getInventory().setItem(slot, sealedLetter);
         }
     }
