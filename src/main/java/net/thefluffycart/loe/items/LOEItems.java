@@ -1,16 +1,18 @@
 package net.thefluffycart.loe.items;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.SuspiciousStewEffects;
 import net.thefluffycart.loe.LettersOfEffection;
+import net.thefluffycart.loe.block.LOEBlocks;
 import net.thefluffycart.loe.items.custom.BlankLetterItem;
 import net.thefluffycart.loe.items.custom.SealedLetterItem;
 import net.thefluffycart.loe.data.BlankLetterContent;
@@ -29,9 +31,23 @@ public class LOEItems {
         return item;
     }
 
+    public static final ResourceKey<CreativeModeTab> CUSTOM_CREATIVE_TAB_KEY = ResourceKey.create(
+            BuiltInRegistries.CREATIVE_MODE_TAB.key(), Identifier.fromNamespaceAndPath(LettersOfEffection.MOD_ID, "creative_tab")
+    );
+
+    public static final CreativeModeTab CUSTOM_CREATIVE_TAB = FabricCreativeModeTab.builder()
+            .icon(() -> new ItemStack(SEALED_LETTER))
+            .title(Component.translatable("creativeTab.loe"))
+            .displayItems((params, output) -> {
+                output.accept(BLANK_LETTER);
+                output.accept(SEALED_LETTER);
+                output.accept(LOEBlocks.LETTER_OPENER);
+            })
+            .build();
+
     public static void initialize() {
         LettersOfEffection.LOGGER.info("Registering Items for LOE");
-
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, CUSTOM_CREATIVE_TAB_KEY, CUSTOM_CREATIVE_TAB);
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
                 .register((creativeTab) -> creativeTab.accept(BLANK_LETTER));
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)

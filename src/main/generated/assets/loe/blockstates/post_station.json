@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "loe:block/post_station"
+    }
+  }
+}

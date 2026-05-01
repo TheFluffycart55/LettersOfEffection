@@ -5,6 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import net.thefluffycart.loe.block.LOEBlocks;
 import net.thefluffycart.loe.items.LOEItems;
 import net.thefluffycart.loe.data.LOEDataComponents;
+import net.thefluffycart.loe.villagers.LOEVillagers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,7 @@ public class LettersOfEffection implements ModInitializer {
 		LOEDataComponents.initialize();
 		LOEItems.initialize();
 		LOEBlocks.initialize();
+		LOEVillagers.registerVillagers();
 		LOGGER.info("Hello Fabric world!");
 	}
 }

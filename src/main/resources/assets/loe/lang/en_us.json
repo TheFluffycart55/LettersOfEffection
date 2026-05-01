@@ -18,5 +18,7 @@
   "letter.view.title": "Letter View Screen",
 
   "item.loe.sealed_letter": "Sealed Letter",
-  "item.loe.blank_letter": "Blank Letter"
+  "item.loe.blank_letter": "Blank Letter",
+  "block.loe.letter_opener": "Letter Opener",
+  "creativeTab.loe": "Letters of Effection"
 }
