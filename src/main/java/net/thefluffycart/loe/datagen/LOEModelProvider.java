@@ -8,6 +8,7 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.data.PackOutput;
+import net.thefluffycart.loe.block.LOEBlocks;
 import net.thefluffycart.loe.items.LOEItems;
 
 public class LOEModelProvider extends FabricModelProvider {
@@ -18,7 +19,7 @@ public class LOEModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
-
+        blockModelGenerators.createTrivialCube(LOEBlocks.LETTER_OPENER);
     }
 
     @Override

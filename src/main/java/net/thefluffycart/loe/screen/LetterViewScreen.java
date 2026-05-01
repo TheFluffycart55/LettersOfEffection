@@ -188,7 +188,7 @@ public class LetterViewScreen extends Screen {
         }
 
         Objects.requireNonNull(this.font);
-        int shownLines = Math.min(128 / 9, this.cachedPageComponents.size());
+        int shownLines = Math.min(210 / 30, this.cachedPageComponents.size());
 
         for(int i = 0; i < shownLines; ++i) {
             FormattedCharSequence component = (FormattedCharSequence)this.cachedPageComponents.get(i);
@@ -210,11 +210,11 @@ public class LetterViewScreen extends Screen {
     }
 
     private int backgroundTop() {
-        return 2;
+        return 12;
     }
 
     protected int menuControlsTop() {
-        return this.backgroundTop() + 192 + 2;
+        return this.backgroundTop() + 148 + 2;
     }
 
     public boolean mouseClicked(final MouseButtonEvent event, final boolean doubleClick) {

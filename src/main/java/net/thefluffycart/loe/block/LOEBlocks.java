@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 public class LOEBlocks {
 
-    public static final Block CONDENSED_DIRT = register("condensed_dirt", TestBlock::new, BlockBehaviour.Properties.of().sound(SoundType.GRASS), true);
+    public static final Block LETTER_OPENER = register("letter_opener", TestBlock::new, BlockBehaviour.Properties.of().sound(SoundType.WOOD), true);
 
     private static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, boolean shouldRegisterItem) {
 

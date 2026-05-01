@@ -89,15 +89,14 @@ public class LetterEditScreen extends Screen {
         int left = this.backgroundLeft();
         int top = this.backgroundTop();
         int padding = 8;
-        this.page = MultiLineEditBox.builder().setShowDecorations(false).setTextColor(-16777216).setCursorColor(-16777216).setShowBackground(false).setTextShadow(false).setX((this.width - 114) / 2 - 8).setY(28).build(this.font, 122, 134, CommonComponents.EMPTY);
+        this.page = MultiLineEditBox.builder().setShowDecorations(false).setTextColor(-16777216).setCursorColor(-16777216).setShowBackground(false).setTextShadow(false).setX((this.width - 114) / 2 - 8).setY(32).build(this.font, 122, 86, CommonComponents.EMPTY);
         this.page.setCharacterLimit(1024);
         MultiLineEditBox var10000 = this.page;
         Objects.requireNonNull(this.font);
-        var10000.setLineLimit(126 / 9);
+        var10000.setLineLimit(210 / 30);
         this.page.setValueListener((value) -> this.pages.set(this.currentPage, value));
         this.addRenderableWidget(this.page);
         this.updatePageContent();
-        this.numberOfPages = this.getPageNumberMessage();
         this.addRenderableWidget(Button.builder(SIGN_BOOK_LABEL, (button) -> this.minecraft.setScreen(this.signScreen)).pos(this.width / 2 - 98 - 2, this.menuControlsTop()).width(98).build());
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, (button) -> {
             this.minecraft.setScreen((Screen)null);
@@ -110,11 +109,11 @@ public class LetterEditScreen extends Screen {
     }
 
     private int backgroundTop() {
-        return 2;
+        return 12;
     }
 
     private int menuControlsTop() {
-        return this.backgroundTop() + 192 + 2;
+        return this.backgroundTop() + 148 + 2;
     }
 
     protected void setInitialFocus() {
@@ -122,16 +121,11 @@ public class LetterEditScreen extends Screen {
     }
 
     public Component getNarrationMessage() {
-        return CommonComponents.joinForNarration(new Component[]{super.getNarrationMessage(), this.getPageNumberMessage()});
-    }
-
-    private Component getPageNumberMessage() {
-        return Component.translatable("book.pageIndicator", new Object[]{this.currentPage + 1, this.getNumPages()}).withColor(-16777216).withoutShadow();
+        return CommonComponents.joinForNarration(new Component[]{super.getNarrationMessage()});
     }
 
     private void updatePageContent() {
         this.page.setValue((String)this.pages.get(this.currentPage), true);
-        this.numberOfPages = this.getPageNumberMessage();
     }
 
     private void eraseEmptyTrailingPages() {

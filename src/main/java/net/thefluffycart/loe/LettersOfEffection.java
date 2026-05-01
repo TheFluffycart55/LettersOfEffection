@@ -4,7 +4,6 @@ import net.fabricmc.api.ModInitializer;
 
 import net.thefluffycart.loe.block.LOEBlocks;
 import net.thefluffycart.loe.items.LOEItems;
-import net.thefluffycart.loe.data.LOEComponentPredicates;
 import net.thefluffycart.loe.data.LOEDataComponents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,6 @@ public class LettersOfEffection implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOEComponentPredicates.initialize();
 		LOEDataComponents.initialize();
 		LOEItems.initialize();
 		LOEBlocks.initialize();

@@ -50,7 +50,7 @@ public class LetterSignScreen extends Screen {
         Button finalizeButton = Button.builder(Component.translatable("letter.finalizeButton"), (button) -> {
             this.saveChanges();
             this.minecraft.setScreen((Screen)null);
-        }).bounds(this.width / 2 - 100, 196, 98, 20).build();
+        }).bounds(this.width / 2 - 100, 164, 98, 20).build();
         finalizeButton.active = false;
         this.titleBox = (EditBox)this.addRenderableWidget(new EditBox(this.minecraft.font, (this.width - 114) / 2 - 3, 50, 114, 20, TITLE_EDIT_BOX));
         this.titleBox.setMaxLength(15);
@@ -64,7 +64,7 @@ public class LetterSignScreen extends Screen {
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_CANCEL, (button) -> {
             this.titleValue = this.titleBox.getValue();
             this.minecraft.setScreen(this.letterEditScreen);
-        }).bounds(this.width / 2 + 2, 196, 98, 20).build());
+        }).bounds(this.width / 2 + 2, 164, 98, 20).build());
     }
 
     protected void setInitialFocus() {
@@ -103,6 +103,6 @@ public class LetterSignScreen extends Screen {
 
     public void extractBackground(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, final float a) {
         super.extractBackground(graphics, mouseX, mouseY, a);
-        graphics.blit(RenderPipelines.GUI_TEXTURED, LetterViewScreen.LETTER_LOCATION, (this.width - 192) / 2, 2, 0.0F, 0.0F, 192, 192, 256, 256);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, LetterViewScreen.LETTER_LOCATION, (this.width - 192) / 2, 12, 0.0F, 0.0F, 192, 192, 256, 256);
     }
 }
