@@ -1,0 +1,12 @@
+{
+  "gives": {
+    "id": "loe:postbench"
+  },
+  "max_uses": 6.0,
+  "reputation_discount": 0.015,
+  "wants": {
+    "count": 6.0,
+    "id": "minecraft:emerald"
+  },
+  "xp": 22.0
+}

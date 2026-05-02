@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_top",
-  "textures": {
-    "side": "loe:block/post_station_side",
-    "top": "loe:block/post_station_top"
-  }
-}

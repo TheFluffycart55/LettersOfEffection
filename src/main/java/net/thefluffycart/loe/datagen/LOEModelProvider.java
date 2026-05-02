@@ -21,7 +21,7 @@ public class LOEModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
         blockModelGenerators.createTrivialCube(LOEBlocks.LETTER_OPENER);
-        blockModelGenerators.createTrivialBlock(LOEBlocks.POST_STATION, TexturedModel.CUBE_TOP);
+        blockModelGenerators.createTrivialBlock(LOEBlocks.POSTBENCH, TexturedModel.CUBE_TOP);
     }
 
     @Override

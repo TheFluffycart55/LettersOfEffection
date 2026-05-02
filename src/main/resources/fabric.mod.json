@@ -5,11 +5,11 @@
 	"name": "Letters of Effection",
 	"description": "Whether you're confessing to your Senpai, or removing the competition! Letters of Effection will make any task easier",
 	"authors": [
-		"Me!"
+		"TheFluffycart55"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/TheFluffycart55/LettersOfEffection",
+		"sources": "https://github.com/TheFluffycart55/LettersOfEffection"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/loe/icon.png",

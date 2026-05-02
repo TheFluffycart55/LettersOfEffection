@@ -19,7 +19,7 @@ import net.thefluffycart.loe.datagen.villager.LOETradeSets;
 
 public class LOEVillagers {
     public static final ResourceKey<PoiType> POSTBENCH_POI_KEY = registerPoiKey("postbench_poi");
-    public static final PoiType POSTBENCH_POI = registerPOI("postbench_poi", LOEBlocks.POST_STATION);
+    public static final PoiType POSTBENCH_POI = registerPOI("postbench_poi", LOEBlocks.POSTBENCH);
 
     public static final ResourceKey<VillagerProfession> POSTMASTER_KEY =
             ResourceKey.create(Registries.VILLAGER_PROFESSION, Identifier.fromNamespaceAndPath(LettersOfEffection.MOD_ID, "postmaster"));

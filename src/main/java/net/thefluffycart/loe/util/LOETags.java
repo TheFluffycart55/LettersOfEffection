@@ -10,6 +10,9 @@ public class LOETags {
     public static class Trades {
         public static final TagKey<VillagerTrade> POSTMASTER_LEVEL_1 = createTag("postmaster/level_1");
         public static final TagKey<VillagerTrade> POSTMASTER_LEVEL_2 = createTag("postmaster/level_2");
+        public static final TagKey<VillagerTrade> POSTMASTER_LEVEL_3 = createTag("postmaster/level_3");
+        public static final TagKey<VillagerTrade> POSTMASTER_LEVEL_4 = createTag("postmaster/level_4");
+        public static final TagKey<VillagerTrade> POSTMASTER_LEVEL_5 = createTag("postmaster/level_5");
 
 
         private static TagKey<VillagerTrade> createTag(String name) {

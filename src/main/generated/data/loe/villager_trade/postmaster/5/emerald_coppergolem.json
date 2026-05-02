@@ -1,0 +1,11 @@
+{
+  "gives": {
+    "id": "minecraft:oxidized_copper_golem_statue"
+  },
+  "reputation_discount": 0.015,
+  "wants": {
+    "count": 7.0,
+    "id": "minecraft:emerald"
+  },
+  "xp": 30.0
+}

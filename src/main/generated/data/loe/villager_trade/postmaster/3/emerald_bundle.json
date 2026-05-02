@@ -1,0 +1,12 @@
+{
+  "gives": {
+    "id": "minecraft:bundle"
+  },
+  "max_uses": 8.0,
+  "reputation_discount": 0.025,
+  "wants": {
+    "count": 7.0,
+    "id": "minecraft:emerald"
+  },
+  "xp": 18.0
+}

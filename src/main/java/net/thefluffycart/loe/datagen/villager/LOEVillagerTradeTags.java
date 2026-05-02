@@ -19,9 +19,23 @@ public class LOEVillagerTradeTags extends FabricTagsProvider<VillagerTrade> {
     @Override
     protected void addTags(HolderLookup.Provider registries) {
         getOrCreateRawBuilder(LOETags.Trades.POSTMASTER_LEVEL_1)
-                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_1_EMERALD_BISMUTH.identifier()))
-                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_1_EMERALD_RAW_BISMUTH.identifier()));
+                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_1_EMERALD_INK.identifier()))
+                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_1_EMERALD_SHELF.identifier()))
+                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_1_BOOK_EMERALD.identifier()));
+
         getOrCreateRawBuilder(LOETags.Trades.POSTMASTER_LEVEL_2)
-                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_2_EMERALD_CHAIR.identifier()));
+                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_2_EMERALD_COMPASS.identifier()))
+                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_2_EMERALD_POSTBENCH.identifier()))
+                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_2_RESIN_EMERALD.identifier()));
+
+        getOrCreateRawBuilder(LOETags.Trades.POSTMASTER_LEVEL_3)
+                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_3_EMERALD_BLANKLETTER.identifier()))
+                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_3_EMERALD_BUNDLE.identifier()));
+
+        getOrCreateRawBuilder(LOETags.Trades.POSTMASTER_LEVEL_4)
+                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_4_EMERALD_LODESTONE.identifier()));
+
+        getOrCreateRawBuilder(LOETags.Trades.POSTMASTER_LEVEL_5)
+                .add(TagEntry.element(LOEVillagerTrades.POSTMASTER_5_EMERALD_COPPERGOLEM.identifier()));
     }
 }

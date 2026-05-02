@@ -1,0 +1,12 @@
+{
+  "gives": {
+    "id": "loe:blank_letter"
+  },
+  "max_uses": 16.0,
+  "reputation_discount": 0.065,
+  "wants": {
+    "count": 5.0,
+    "id": "minecraft:emerald"
+  },
+  "xp": 14.0
+}

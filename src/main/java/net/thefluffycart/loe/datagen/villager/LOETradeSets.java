@@ -18,10 +18,16 @@ import java.util.Optional;
 public class LOETradeSets {
     public static final ResourceKey<TradeSet> POSTMASTER_LEVEL_1 = create("postmaster/level_1");
     public static final ResourceKey<TradeSet> POSTMASTER_LEVEL_2 = create("postmaster/level_2");
+    public static final ResourceKey<TradeSet> POSTMASTER_LEVEL_3 = create("postmaster/level_3");
+    public static final ResourceKey<TradeSet> POSTMASTER_LEVEL_4 = create("postmaster/level_4");
+    public static final ResourceKey<TradeSet> POSTMASTER_LEVEL_5 = create("postmaster/level_5");
 
     public static void bootstrap(BootstrapContext<TradeSet> context) {
         register(context, POSTMASTER_LEVEL_1, LOETags.Trades.POSTMASTER_LEVEL_1);
         register(context, POSTMASTER_LEVEL_2, LOETags.Trades.POSTMASTER_LEVEL_2);
+        register(context, POSTMASTER_LEVEL_3, LOETags.Trades.POSTMASTER_LEVEL_3);
+        register(context, POSTMASTER_LEVEL_4, LOETags.Trades.POSTMASTER_LEVEL_4);
+        register(context, POSTMASTER_LEVEL_5, LOETags.Trades.POSTMASTER_LEVEL_5);
     }
 
     private static ResourceKey<TradeSet> create(final String id) {
