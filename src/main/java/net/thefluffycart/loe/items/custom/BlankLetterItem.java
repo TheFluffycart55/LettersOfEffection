@@ -1,7 +1,5 @@
 package net.thefluffycart.loe.items.custom;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ResolutionContext;
 import net.minecraft.network.protocol.game.ClientboundOpenBookPacket;
@@ -20,6 +18,7 @@ import net.thefluffycart.loe.data.LOEDataComponents;
 import net.thefluffycart.loe.data.SealedLetterContent;
 import net.thefluffycart.loe.screen.LetterEditScreen;
 import net.thefluffycart.loe.items.LOEItems;
+import net.thefluffycart.loe.util.LOEClientHelper;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class BlankLetterItem extends Item {
             ItemStack itemStack = player.getItemInHand(hand);
             BlankLetterContent content = itemStack.get(LOEDataComponents.BLANK_LETTER_CONTENT);
             if (content != null) {
-                Minecraft.getInstance().setScreen(new LetterEditScreen(((LocalPlayer) player), itemStack, hand, content));
+                LOEClientHelper.openBlank(level, player, hand);
             }
             player.awardStat(Stats.ITEM_USED.get(this));
             return InteractionResult.SUCCESS;
@@ -43,13 +42,13 @@ public class BlankLetterItem extends Item {
         {
             ItemStack itemStack = player.getItemInHand(hand);
             if (itemStack.has(LOEDataComponents.BLANK_LETTER_CONTENT)) {
-                if (SealedLetterContent.resolveForItem(itemStack, ResolutionContext.create(((ServerPlayer) player).createCommandSourceStack()), ((ServerPlayer) player).registryAccess())) {
-                    ((ServerPlayer) player).containerMenu.broadcastChanges();
+                if (SealedLetterContent.resolveForItem(itemStack, ResolutionContext.create(((ServerPlayer) player).createCommandSourceStack()), (player).registryAccess())) {
+                    (player).containerMenu.broadcastChanges();
                 }
                 ((ServerPlayer) player).connection.send(new ClientboundOpenBookPacket(hand));
             }
             player.awardStat(Stats.ITEM_USED.get(this));
-            return InteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS_SERVER;
         }
     }
 
