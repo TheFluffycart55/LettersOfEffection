@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#F",
+    "PP",
+    "PP"
+  ],
+  "key": {
+    "#": "minecraft:paper",
+    "F": "minecraft:feather",
+    "P": "#minecraft:planks"
+  },
+  "result": {
+    "id": "loe:postbench"
+  }
+}

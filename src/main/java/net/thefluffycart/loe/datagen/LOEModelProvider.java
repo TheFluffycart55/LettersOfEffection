@@ -27,6 +27,7 @@ public class LOEModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerators) {
         itemModelGenerators.generateFlatItem(LOEItems.BLANK_LETTER, ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModelGenerators.generateFlatItem(LOEItems.SEARED_LETTER, ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModelGenerators.generateFlatItem(LOEItems.SEALED_LETTER, ModelTemplates.FLAT_HANDHELD_ITEM);
 
     }

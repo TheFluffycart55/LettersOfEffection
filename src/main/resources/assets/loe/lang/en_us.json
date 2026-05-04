@@ -19,6 +19,8 @@
 
   "item.loe.sealed_letter": "Sealed Letter",
   "item.loe.blank_letter": "Blank Letter",
+  "item.loe.seared_letter": "Seared Letter",
   "block.loe.letter_opener": "Letter Opener",
+  "block.loe.postbench": "Postbench",
   "creativeTab.loe": "Letters of Effection"
 }

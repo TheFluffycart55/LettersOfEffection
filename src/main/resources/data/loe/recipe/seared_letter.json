@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "minecraft:tnt",
+    "loe:sealed_letter"
+  ],
+  "result": {
+    "id": "loe:seared_letter"
+  }
+}

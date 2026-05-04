@@ -27,7 +27,10 @@ public class LOEVillagers {
             Component.literal("Postmaster"), holder -> holder.is(POSTBENCH_POI_KEY), holder -> holder.is(POSTBENCH_POI_KEY),
             ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_LIBRARIAN, Int2ObjectMap.ofEntries(
             Int2ObjectMap.entry(1, LOETradeSets.POSTMASTER_LEVEL_1),
-            Int2ObjectMap.entry(2, LOETradeSets.POSTMASTER_LEVEL_2))));
+            Int2ObjectMap.entry(1, LOETradeSets.POSTMASTER_LEVEL_2),
+            Int2ObjectMap.entry(1, LOETradeSets.POSTMASTER_LEVEL_3),
+            Int2ObjectMap.entry(1, LOETradeSets.POSTMASTER_LEVEL_4),
+            Int2ObjectMap.entry(2, LOETradeSets.POSTMASTER_LEVEL_5))));
 
 
     private static VillagerProfession registerVillagerProfession(String name, VillagerProfession profession) {

@@ -17,12 +17,14 @@ import net.thefluffycart.loe.items.custom.BlankLetterItem;
 import net.thefluffycart.loe.items.custom.SealedLetterItem;
 import net.thefluffycart.loe.data.BlankLetterContent;
 import net.thefluffycart.loe.data.LOEDataComponents;
+import net.thefluffycart.loe.items.custom.SearedLetterItem;
 
 import java.util.function.Function;
 
 public class LOEItems {
     public static final Item BLANK_LETTER = register("blank_letter", BlankLetterItem::new, (new Item.Properties()).stacksTo(1).component(LOEDataComponents.BLANK_LETTER_CONTENT, BlankLetterContent.EMPTY));
     public static final Item SEALED_LETTER = register("sealed_letter", SealedLetterItem::new, (new Item.Properties()).stacksTo(16).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, false));
+    public static final Item SEARED_LETTER = register("seared_letter", SearedLetterItem::new, (new Item.Properties()).stacksTo(16));
 
     public static <T extends Item> T register(String name, Function<Item.Properties, T> itemFactory, Item.Properties settings) {
         ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(LettersOfEffection.MOD_ID, name));
@@ -41,7 +43,7 @@ public class LOEItems {
             .displayItems((params, output) -> {
                 output.accept(BLANK_LETTER);
                 output.accept(SEALED_LETTER);
-                output.accept(LOEBlocks.LETTER_OPENER);
+                output.accept(LOEBlocks.POSTBENCH);
             })
             .build();
 
