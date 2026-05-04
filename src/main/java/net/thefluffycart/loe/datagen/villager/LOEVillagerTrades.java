@@ -36,56 +36,56 @@ public class LOEVillagerTrades {
         register(context, POSTMASTER_1_EMERALD_INK, new VillagerTrade(
                 new TradeCost(Items.EMERALD, 4),
                 new ItemStackTemplate(Items.INK_SAC, 12),
-                12, 16, 0.025f,
+                12, 10, 0.025f,
                 Optional.empty(), List.of()));
         register(context, POSTMASTER_1_EMERALD_SHELF, new VillagerTrade(
                 new TradeCost(Items.EMERALD, 6),
                 new ItemStackTemplate(Blocks.OAK_SHELF.asItem(), 1),
-                6, 23, 0.05f,
+                6, 18, 0.05f,
                 Optional.empty(), List.of()));
         register(context, POSTMASTER_1_BOOK_EMERALD, new VillagerTrade(
                 new TradeCost(Items.BOOK, 6),
                 new ItemStackTemplate(Items.EMERALD, 1),
-                9, 19, 0.05f,
+                9, 12, 0.05f,
                 Optional.empty(), List.of()));
 
         register(context, POSTMASTER_2_EMERALD_COMPASS, new VillagerTrade(
                 new TradeCost(Items.EMERALD, 12),
                 new ItemStackTemplate(Items.COMPASS, 1),
-                6, 20, 0.05f,
+                6, 18, 0.05f,
                 Optional.empty(), List.of()));
         register(context, POSTMASTER_2_EMERALD_POSTBENCH, new VillagerTrade(
                 new TradeCost(Items.EMERALD, 6),
                 new ItemStackTemplate(LOEBlocks.POSTBENCH.asItem(), 1),
-                6, 22, 0.015f,
+                6, 12, 0.015f,
                 Optional.empty(), List.of()));
         register(context, POSTMASTER_2_RESIN_EMERALD, new VillagerTrade(
                 new TradeCost(Items.RESIN_CLUMP, 8),
                 new ItemStackTemplate(LOEBlocks.POSTBENCH.asItem(), 2),
-                12, 18, 0.045f,
+                12, 10, 0.045f,
                 Optional.empty(), List.of()));
 
         register(context, POSTMASTER_3_EMERALD_BLANKLETTER, new VillagerTrade(
                 new TradeCost(Items.EMERALD, 5),
                 new ItemStackTemplate(LOEItems.BLANK_LETTER),
-                16, 14, 0.065f,
+                16, 12, 0.065f,
                 Optional.empty(), List.of()));
         register(context, POSTMASTER_3_EMERALD_BUNDLE, new VillagerTrade(
                 new TradeCost(Items.EMERALD, 7),
                 new ItemStackTemplate(Items.BUNDLE),
-                8, 18, 0.025f,
+                8, 12, 0.025f,
                 Optional.empty(), List.of()));
 
         register(context, POSTMASTER_4_EMERALD_LODESTONE, new VillagerTrade(
                 new TradeCost(Items.EMERALD, 7),
                 new ItemStackTemplate(Blocks.LODESTONE.asItem()),
-                12, 24, 0.025f,
+                12, 20, 0.025f,
                 Optional.empty(), List.of()));
 
         register(context, POSTMASTER_5_EMERALD_COPPERGOLEM, new VillagerTrade(
                 new TradeCost(Items.EMERALD, 7),
                 new ItemStackTemplate(Blocks.OXIDIZED_COPPER_GOLEM_STATUE.asItem()),
-                4, 30, 0.015f,
+                4, 20, 0.015f,
                 Optional.empty(), List.of()));
     }
 
